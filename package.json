@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "module": "src/index.js",
   "scripts": {
-    "test": "npm run build && ava",
+    "test": "npm run build && ava -v",
     "build": "rollup src/index.js --format umd --name 'blingblingjs' --file dist/index.js"
   },
   "author": "argyleink",

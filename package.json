@@ -2,6 +2,10 @@
   "name": "blingblingjs",
   "version": "1.0.1",
   "description": "like bling.js, but more bling",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/argyleink/blingblingjs.git"
+  },
   "main": "dist/index.js",
   "module": "src/index.js",
   "scripts": {
@@ -9,7 +13,16 @@
     "build": "rollup src/index.js --format umd --name 'blingblingjs' --file dist/index.js"
   },
   "author": "argyleink",
+  "keywords": [
+    "javascript",
+    "utility",
+    "jquery-like",
+    "es6"
+  ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/argyleink/blingblingjs/issues"
+  },
   "devDependencies": {
     "ava": "^1.0.0-beta.3",
     "browser-env": "^3.2.5",

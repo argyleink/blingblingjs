@@ -44,12 +44,18 @@ BlingBling supports ES6 module importing and common module loading
 ```js
 import { $, $$ } from 'blingblingjs'
 
+// query the DOM easier
 const main_btn   = $('button[primary]')
 const btns       = $$('button')
 const btnSpans   = $$('span', btns)
 
+// add events easier
 main_btn.on('click', e => console.log(e.target))
 btns.on('click', e => console.info(e.target))
+
+// convert nodes to have the bling sugar
+$(document.querySelector('button'))
+$$(document.querySelectorAll('button'))
 
 // use native array methods on the nodes: map, reduce, filter
 btns.forEach(btn => console.warn(btn))
@@ -57,6 +63,7 @@ btns.forEach(btn => console.warn(btn))
 // watch multiple events
 $('h1').on('click mouseover', ({target}) => console.log(target.textContent))
 
+// set attributes with an object on a node, or nodes
 main_btn.setAttributes({
   test: 'foo',
   hi: 'bye',

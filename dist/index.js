@@ -19,23 +19,28 @@
     }
   };
 
-  // short querySelector: $('.foo') $('.child', context_node)
   const $ = (query, $context = document) =>
-    Object.assign($context.querySelector(query), sugar);
+    query.nodeType
+      ? Object.assign(query, sugar)
+      : Object.assign($context.querySelector(query), sugar);
 
-  // shorthand querySelectorAll: $$('.foo') $$('.child', context_node)
-  const $$ = (query, $context = document) =>
-    Object.assign(
-      [...$context.querySelectorAll(query)]
-      .map($el => Object.assign($el, sugar))
-    , {
-      on: function(names, fn) {
-        this.forEach($el => $el.on(names, fn));
-      },
-      setAttributes: function(attrs) {
-        this.forEach($el => $el.setAttributes(attrs));
+  const $$ = (query, $context = document) => {
+    const nodes = NodeList.prototype.isPrototypeOf(query)
+      ? query
+      : $context.querySelectorAll(query);
+
+    return Object.assign(
+      [...nodes].map($el => Object.assign($el, sugar)),
+      {
+        on: function(names, fn) {
+          this.forEach($el => $el.on(names, fn));
+        },
+        setAttributes: function(attrs) {
+          this.forEach($el => $el.setAttributes(attrs));
+        }
       }
-    });
+    )
+  };
 
   exports.$ = $;
   exports.$$ = $$;

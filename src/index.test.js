@@ -17,6 +17,14 @@ test('$("div")', t => {
   t.pass()
 })
 
+test('$(node)', t => {
+  const div = document.createElement('div')
+
+  t.truthy($(div).on)
+  t.truthy($(div).setAttributes)
+  t.pass()
+})
+
 test('$("div", parent)', t => {
   const div = document.createElement('div')
   const p = document.createElement('p')
@@ -36,6 +44,20 @@ test('$$("div")', t => {
     document.body.appendChild(div)
 
   t.is($$('div').length, len - 1)
+  t.pass()
+})
+
+test('$$(nodes)', t => {
+  const div = document.createElement('div')
+  const len = 3
+
+  for (var i = 0; i < len; i++)
+    document.body.appendChild(div)
+
+  const nodes = document.querySelectorAll('div')
+
+  t.truthy($$(nodes).on)
+  t.truthy($$(nodes).setAttributes)
   t.pass()
 })
 
@@ -94,18 +116,10 @@ test('$$("button").setAttributes({...})', t => {
   t.pass()
 })
 
-// test('$("div").on("click", e => ...)', t => {
-//   t.pass()
-// })
+test.todo('$("div").on("click", e => ...)')
 
-// test('$("div").on("click mouseover", e => ...)', t => {
-//   t.pass()
-// })
+test.todo('$("div").on("click mouseover", e => ...)')
 
-// test('$$("div").on("click", e => ...)', t => {
-//   t.pass()
-// })
+test.todo('$$("div").on("click", e => ...)')
 
-// test('$$("div").on("click mouseover", e => ...)', t => {
-//   t.pass()
-// })
+test.todo('$$("div").on("click mouseover", e => ...)')

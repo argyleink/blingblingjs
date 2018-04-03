@@ -1,5 +1,4 @@
 # BlingBlingJS
-[![Build Status: Linux](https://travis-ci.org/argyleink/blingblingjs.svg?branch=master)](https://travis-ci.org/argyleink/blingblingjs)
 <p style="text-align='center'">
   <img src="https://img.shields.io/travis/argyleink/blingblingjs/master.svg" alt="Build Status">
   <img src="https://img.shields.io/npm/dt/blingblingjs.svg" alt="Total Downloads">

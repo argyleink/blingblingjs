@@ -1,29 +1,70 @@
-# blingblingjs
-> jQuery-esque shorthands for long named browser functions... and some
-
+# BlingBlingJS
 [![Build Status: Linux](https://travis-ci.org/argyleink/blingblingjs.svg?branch=master)](https://travis-ci.org/argyleink/blingblingjs)
+<p style="text-align='center'">
+  <img src="https://img.shields.io/travis/argyleink/blingblingjs/master.svg" alt="Build Status">
+  <img src="https://img.shields.io/npm/dt/blingblingjs.svg" alt="Total Downloads">
+  <img src="https://img.shields.io/npm/v/blingblingjs.svg" alt="Latest Release">
+  <img src="https://img.shields.io/npm/l/blingblingjs.svg" alt="License">
+</p>
 
-## Why BlingBling? (hehe)
-- Minimal and fast
-- Syntax you already know
+> jQuery-esque shorthands for common long named DOM methods
+
+###### What for?
+**Developer ergonomics!** 
+If you agree with any of the following, you may appreciate this tiny library:
+* Love vanilla js
+* Hate typing `document.querySelector` over.. and over.. 
+* Hate typing `addEventLIstener` over.. and over..
+* Really wish `document.querySelectorAll` had array methods on it.. without manual destructering
+* Confused that there is no `node.setAttributes({...})` or even better `nodeList.setAttributes({...})`
+* Loved jQuery selector syntax
+
+###### Why BlingBling?
+- Minimal
+- Worth it's weight (should save more characters than it loads)
 - Only enhances the nodes you query with it
+- ES6 version of popular [bling.js](https://gist.github.com/paulirish/12fb951a8b893a454b32) by Paul Irish
 - Tested
 
-## Usage
-### Add BlingBling to your project
-To install and set up BlingBling, run:
+<!-- [START getstarted] -->
+## Getting Started
 
-```console
+### Installation
+
+To use BlingBlingJS in your project, run:
+
+```bash
 $ npm i blingblingjs
 ```
 
-### Import or require it
+### Usage
 
+BlingBling supports ES6 module importing and common module loading
+
+**Examples**
 ```js
 import { $, $$ } from 'blingblingjs'
 
-$('#target').on('click touchstart', ({target}) => ...)
-$$('figcaption').on('mouseover touchmove', e => ...)
+const main_btn   = $('button[primary]')
+const btns       = $$('button')
+const btnSpans   = $$('span', btns)
+
+main_btn.on('click', e => console.log(e.target))
+btns.on('click', e => console.info(e.target))
+
+// use native array methods on the nodes: map, reduce, filter
+btns.forEach(btn => console.warn(btn))
+
+// watch multiple events
+$('h1').on('click mouseover', ({target}) => console.log(target.textContent))
+
+main_btn.setAttributes({
+  test: 'foo',
+  hi: 'bye',
+})
+
+btns.setAttributes({
+  tests: 'foo',
+  hi: 'bye',
+})
 ```
-
-

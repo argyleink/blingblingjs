@@ -19,11 +19,11 @@ If you agree with any of the following, you may appreciate this tiny library:
 * Loved jQuery selector syntax
 
 ###### Why BlingBling?
-- Minimal
+- Minimal at 572 bytes gzipped
 - Worth it's weight (should save more characters than it loads)
 - Only enhances the nodes you query with it
 - ES6 version of popular [bling.js](https://gist.github.com/paulirish/12fb951a8b893a454b32) by Paul Irish
-- Tested
+- [Tested](https://github.com/argyleink/blingblingjs/blob/master/src/index.test.js)
 
 <!-- [START getstarted] -->
 ## Getting Started
@@ -42,7 +42,9 @@ BlingBling supports ES6 module importing and common module loading
 
 **Examples**
 ```js
-import { $, $$ } from 'blingblingjs'
+// import the bling or the blingbling
+import { $, $$ } from 'blingblingjs'      // es6 module support
+const { $, $$ } = require('blingblingjs') // commonjs support
 
 // query the DOM easier
 const main_btn   = $('button[primary]')
@@ -54,8 +56,10 @@ main_btn.on('click', e => console.log(e.target))
 btns.on('click', e => console.info(e.target))
 
 // convert nodes to have the bling sugar
-$(document.querySelector('button'))
-$$(document.querySelectorAll('button'))
+let single = document.querySelector('button')
+let singles = document.querySelectorAll('button')
+let sugared_single = $(single)
+let sugared_singles = $$(singles)
 
 // use native array methods on the nodes: map, reduce, filter
 btns.forEach(btn => console.warn(btn))

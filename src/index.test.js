@@ -116,10 +116,66 @@ test('$$("button").setAttributes({...})', t => {
   t.pass()
 })
 
-test.todo('$("div").on("click", e => ...)')
+test.cb('$("button").on("click", e => ...)', t => {
+  const btn = document.createElement('button')
+  btn.classList.add('test')
+  document.body.appendChild(btn)
 
-test.todo('$("div").on("click mouseover", e => ...)')
+  $('.test').on('click', e => t.end())
+  btn.click()
+})
 
-test.todo('$$("div").on("click", e => ...)')
+test('$("button").on("click ...", e => ...)', t => {
+  t.plan(2)
 
-test.todo('$$("div").on("click mouseover", e => ...)')
+  const btn = document.createElement('button')
+
+  $(btn).on('click dblclick', e => t.pass())
+  btn.click()
+  btn.dispatchEvent(new window.MouseEvent('dblclick', {
+    bubbles: true
+  }))
+})
+
+test.cb('$(node).on("click", e => ...)', t => {
+  const btn = document.createElement('button')
+
+  $(btn).on('click', e => t.end())
+  btn.click()
+})
+
+test.cb('$$("button").on("click", e => ...)', t => {
+  const btn = document.createElement('button')
+  btn.classList.add('test')
+
+  document.body.appendChild(btn)
+  document.body.appendChild(btn)
+
+  $$('.test').on('click', e => t.end())
+  btn.click()
+})
+
+test('$$("button").on("click ...", e => ...)', t => {
+  t.plan(2)
+
+  const btn = document.createElement('button')
+  document.body.appendChild(btn)
+  document.body.appendChild(btn)
+  const list = document.querySelectorAll('button')
+
+  $$(list).on('click dblclick', e => t.pass())
+  btn.click()
+  btn.dispatchEvent(new window.MouseEvent('dblclick', {
+    bubbles: true
+  }))
+})
+
+test.cb('$$(node).on("click", e => ...)', t => {
+  const btn = document.createElement('button')
+  document.body.appendChild(btn)
+  document.body.appendChild(btn)
+  const list = document.querySelectorAll('button')
+
+  $$(list).on('click', e => t.end())
+  btn.click()
+})

@@ -12,15 +12,22 @@ const sugar = {
   }
 }
 
-export const $ = (query, $context = document) =>
-  query.nodeType
-    ? Object.assign(query, sugar)
-    : Object.assign($context.querySelector(query), sugar)
+export const $ = (query, $context = document) => {
+  if (query.nodeType) 
+    return Object.assign(query, sugar)
+  else {
+    const matches = $context.querySelector(query)
+    if (!matches && !query.nodeType) return null
+    return Object.assign(matches, sugar)
+  }
+}
 
 export const $$ = (query, $context = document) => {
   const nodes = NodeList.prototype.isPrototypeOf(query)
     ? query
     : $context.querySelectorAll(query)
+
+  if (!nodes.length) return null
 
   return Object.assign(
     [...nodes].map($el => Object.assign($el, sugar)),

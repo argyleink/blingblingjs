@@ -25,6 +25,11 @@ test('$(node)', t => {
   t.pass()
 })
 
+test('$("bad_query")', t => {
+  t.truthy($('bad') == null)
+  t.pass()
+})
+
 test('$("div", parent)', t => {
   const div = document.createElement('div')
   const p = document.createElement('p')
@@ -58,6 +63,11 @@ test('$$(nodes)', t => {
 
   t.truthy($$(nodes).on)
   t.truthy($$(nodes).setAttributes)
+  t.pass()
+})
+
+test('$$("bad_query")', t => {
+  t.truthy($$('nothing') == null)
   t.pass()
 })
 

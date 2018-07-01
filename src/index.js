@@ -4,39 +4,56 @@ const sugar = {
       .split(' ')
       .forEach(name =>
         this.addEventListener(name, fn))
+    return this
   },
-  setAttributes: function(attrs) {
-    Object.entries(attrs)
-      .forEach(([key, val]) =>
-        this.setAttribute(key, val))
+  off: function(names, fn) {
+    names
+      .split(' ')
+      .forEach(name =>
+        this.removeEventListener(name, fn))
+    return this
+  },
+  attr: function(attr, val) {
+    if (val == undefined) return this.getAttribute(attr)
+    this.setAttribute(attr, val || '')
+    return this
   }
 }
 
-export const $ = (query, $context = document) => {
-  if (query.nodeType) 
-    return Object.assign(query, sugar)
-  else {
-    const matches = $context.querySelector(query)
-    if (!matches && !query.nodeType) return null
-    return Object.assign(matches, sugar)
-  }
-}
-
-export const $$ = (query, $context = document) => {
-  const nodes = NodeList.prototype.isPrototypeOf(query)
+export default function $(query, $context = document) {
+  let $nodes = query instanceof NodeList
     ? query
-    : $context.querySelectorAll(query)
+    : query instanceof HTMLElement 
+      ? [query]
+      : $context.querySelectorAll(query)
 
-  if (!nodes.length) return null
+  if (!$nodes.length) $nodes = []
 
   return Object.assign(
-    [...nodes].map($el => Object.assign($el, sugar)),
+    [...$nodes].map($el => Object.assign($el, sugar)), 
     {
       on: function(names, fn) {
         this.forEach($el => $el.on(names, fn))
+        return this
       },
-      setAttributes: function(attrs) {
-        this.forEach($el => $el.setAttributes(attrs))
+      off: function(names, fn) {
+        this.forEach($el => $el.off(names, fn))
+        return this
+      },
+      attr: function(attrs, val) {
+        if (typeof attrs === 'string' && val == undefined)
+          return this[0].getAttribute(attrs)
+
+        else if (typeof attrs === 'object') 
+          this.forEach($el =>
+            Object.entries(attrs)
+              .forEach(([key, val]) =>
+                $el.setAttribute(key, val)))
+
+        else if (val || val == '')
+          this.forEach($el => $el.attr(attrs, val))
+
+        return this
       }
     }
   )

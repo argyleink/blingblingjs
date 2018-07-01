@@ -43,13 +43,13 @@ BlingBling supports ES6 module importing and common module loading
 **Examples**
 ```js
 // import the bling or the blingbling
-import { $, $$ } from 'blingblingjs'      // es6 module support
-const { $, $$ } = require('blingblingjs') // commonjs support
+import $ from 'blingblingjs'      // es6 module support
+const $ = require('blingblingjs') // commonjs support
 
 // query the DOM easier
 const main_btn   = $('button[primary]')
-const btns       = $$('button')
-const btnSpans   = $$('span', btns)
+const btns       = $('button')
+const btnSpans   = $('span', btns)
 
 // add events easier
 main_btn.on('click', e => console.log(e.target))
@@ -59,7 +59,7 @@ btns.on('click', e => console.info(e.target))
 let single = document.querySelector('button')
 let singles = document.querySelectorAll('button')
 let sugared_single = $(single)
-let sugared_singles = $$(singles)
+let sugared_singles = $(singles)
 
 // use native array methods on the nodes: map, reduce, filter
 btns.forEach(btn => console.warn(btn))
@@ -68,12 +68,12 @@ btns.forEach(btn => console.warn(btn))
 $('h1').on('click mouseover', ({target}) => console.log(target.textContent))
 
 // set attributes with an object on a node, or nodes
-main_btn.setAttributes({
+main_btn.attr({
   test: 'foo',
   hi: 'bye',
 })
 
-btns.setAttributes({
+btns.attr({
   tests: 'foo',
   hi: 'bye',
 })

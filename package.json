@@ -24,7 +24,7 @@
     "url": "https://github.com/argyleink/blingblingjs/issues"
   },
   "devDependencies": {
-    "ava": "^1.0.0-beta.3",
+    "ava": "^1.0.0-beta.6",
     "browser-env": "^3.2.5",
     "rollup": "^0.57.1"
   }

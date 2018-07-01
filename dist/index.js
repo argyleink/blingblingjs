@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.blingblingjs = {})));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.blingblingjs = factory());
+}(this, (function () { 'use strict';
 
   const sugar = {
     on: function(names, fn) {
@@ -10,47 +10,65 @@
         .split(' ')
         .forEach(name =>
           this.addEventListener(name, fn));
+      return this
     },
-    setAttributes: function(attrs) {
-      Object.entries(attrs)
-        .forEach(([key, val]) =>
-          this.setAttribute(key, val));
+    off: function(names, fn) {
+      names
+        .split(' ')
+        .forEach(name =>
+          this.removeEventListener(name, fn));
+      return this
+    },
+    attr: function(attr, val) {
+      if (val === undefined) return this.getAttribute(attr)
+
+      val == null
+        ? this.removeAttribute(attr)
+        : this.setAttribute(attr, val || '');
+        
+      return this
     }
   };
 
-  const $ = (query, $context = document) => {
-    if (query.nodeType) 
-      return Object.assign(query, sugar)
-    else {
-      const matches = $context.querySelector(query);
-      if (!matches && !query.nodeType) return null
-      return Object.assign(matches, sugar)
-    }
-  };
-
-  const $$ = (query, $context = document) => {
-    const nodes = NodeList.prototype.isPrototypeOf(query)
+  function $(query, $context = document) {
+    let $nodes = query instanceof NodeList
       ? query
-      : $context.querySelectorAll(query);
+      : query instanceof HTMLElement 
+        ? [query]
+        : $context.querySelectorAll(query);
 
-    if (!nodes.length) return null
+    if (!$nodes.length) $nodes = [];
 
     return Object.assign(
-      [...nodes].map($el => Object.assign($el, sugar)),
+      [...$nodes].map($el => Object.assign($el, sugar)), 
       {
         on: function(names, fn) {
           this.forEach($el => $el.on(names, fn));
+          return this
         },
-        setAttributes: function(attrs) {
-          this.forEach($el => $el.setAttributes(attrs));
+        off: function(names, fn) {
+          this.forEach($el => $el.off(names, fn));
+          return this
+        },
+        attr: function(attrs, val) {
+          if (typeof attrs === 'string' && val === undefined)
+            return this[0].attr(attrs)
+
+          else if (typeof attrs === 'object') 
+            this.forEach($el =>
+              Object.entries(attrs)
+                .forEach(([key, val]) =>
+                  $el.attr(key, val)));
+
+          else if (typeof attrs == 'string' && (val || val == null || val == ''))
+            this.forEach($el => $el.attr(attrs, val));
+
+          return this
         }
       }
     )
-  };
+  }
 
-  exports.$ = $;
-  exports.$$ = $$;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
+  return $;
 
 })));

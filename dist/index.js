@@ -20,8 +20,12 @@
       return this
     },
     attr: function(attr, val) {
-      if (val == undefined) return this.getAttribute(attr)
-      this.setAttribute(attr, val || '');
+      if (val === undefined) return this.getAttribute(attr)
+
+      val == null
+        ? this.removeAttribute(attr)
+        : this.setAttribute(attr, val || '');
+        
       return this
     }
   };
@@ -47,16 +51,16 @@
           return this
         },
         attr: function(attrs, val) {
-          if (typeof attrs === 'string' && val == undefined)
-            return this[0].getAttribute(attrs)
+          if (typeof attrs === 'string' && val === undefined)
+            return this[0].attr(attrs)
 
           else if (typeof attrs === 'object') 
             this.forEach($el =>
               Object.entries(attrs)
                 .forEach(([key, val]) =>
-                  $el.setAttribute(key, val)));
+                  $el.attr(key, val)));
 
-          else if (val || val == '')
+          else if (typeof attrs == 'string' && (val || val == null || val == ''))
             this.forEach($el => $el.attr(attrs, val));
 
           return this

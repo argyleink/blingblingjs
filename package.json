@@ -1,6 +1,6 @@
 {
   "name": "blingblingjs",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "like bling.js, but more bling",
   "repository": {
     "type": "git",
@@ -26,6 +26,6 @@
   "devDependencies": {
     "ava": "^1.0.0-beta.6",
     "browser-env": "^3.2.5",
-    "rollup": "^0.57.1"
+    "rollup": "^0.65.0"
   }
 }

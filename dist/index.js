@@ -33,7 +33,7 @@
   function $(query, $context = document) {
     let $nodes = query instanceof NodeList
       ? query
-      : query instanceof HTMLElement 
+      : query instanceof HTMLElement || query instanceof SVGElement
         ? [query]
         : $context.querySelectorAll(query);
 

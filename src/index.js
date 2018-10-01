@@ -25,7 +25,7 @@ const sugar = {
 }
 
 export default function $(query, $context = document) {
-  let $nodes = query instanceof NodeList
+  let $nodes = query instanceof NodeList || Array.isArray(query)
     ? query
     : query instanceof HTMLElement || query instanceof SVGElement
       ? [query]

@@ -21,7 +21,7 @@ $().off       // remove event listeners
 $().attr      // CRUD attributes
 
 // query the DOM easier
-const main_btn   = $('button[primary]')
+const [main_btn] = $('button[primary]')
 const btns       = $('button')
 const btnSpans   = $('span', btns)
 
@@ -35,12 +35,12 @@ main_btn.on('contextmenu', logEvent)
 main_btn.off('contextmenu', logEvent)
 
 // convert nodes to have the bling sugar
-let single = document.querySelector('button')
-let singles = document.querySelectorAll('button')
-let sugared_single = $(single)
-let sugared_singles = $(singles)
+let single            = document.querySelector('button')
+let singles           = document.querySelectorAll('button')
+let [sugared_single]  = $(single)
+let sugared_singles   = $(singles)
 
-// use native array methods on the nodes: map, reduce, filter
+// use native array methods on the nodes: forEach, map, reduce, filter
 btns.forEach(btn => console.warn(btn))
 
 // watch multiple events

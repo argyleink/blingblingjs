@@ -11,70 +11,64 @@
 ###### Syntax Demos
 ```js
 // import the bling or the blingbling
-import $ from 'blingblingjs'      // es6 module support
-const $ = require('blingblingjs') // commonjs support
+import $ from 'blingblingjs'                // es6 module support
+const $ = require('blingblingjs')           // commonjs support
 
-// at a high level, this is what is included
-$()           // select nodes
-$().on        // add event listeners
-$().off       // remove event listeners
-$().attr      // CRUD attributes
+// essentials
+$()                                         // select nodes in document
+$().on                                      // add event listeners to nodes
+$().off                                     // remove event listeners from nodes
+$().attr                                    // CRUD attributes on nodes
 
-// query the DOM easier
-const [main_btn] = $('button[primary]')
-const btns       = $('button')
-const btnSpans   = $('span', btns)
-
-// add events easier
-main_btn.on('click', e => console.log(e.target))
-btns.on('click', e => console.info(e.target))
-
-// remove event listeners
-const logEvent = e => console.log(e)
-main_btn.on('contextmenu', logEvent)
-main_btn.off('contextmenu', logEvent)
-
-// convert nodes to have the bling sugar
-let single            = document.querySelector('button')
-let singles           = document.querySelectorAll('button')
-let [sugared_single]  = $(single)
-let sugared_singles   = $(singles)
+// query the DOM in a modern, shorthand way
+const [first_btn]  = $('button[primary]')   // destructure shortcut for 1st/only match
+const btns         = $('button')            // blingbling always returns an array
+const btn_spans    = $('span', btns)        // provide a query context by passing a 2nd param of node/nodes
 
 // use native array methods on the nodes: forEach, map, reduce, filter
-btns.forEach(btn => console.warn(btn))
+btns.forEach(btn, console.log)
+
+// add events easier
+first_btn.on('click', console.info)
+$('button[primary]').on('click', console.info)
 
 // watch multiple events
-$('h1').on('click mouseover', ({target}) => console.log(target.textContent))
+$('h1').on('click mouseover', ({target}) => console.log(target))
 
-// set attributes like normal
-main_btn.attr('rad', true)
+// remove events easier
+const log_event = e => console.warn(e)
+main_btn.on('contextmenu', log_event)
+main_btn.off('contextmenu', log_event)
 
-// get an attribute from a node
-main_btn.attr('rad') // true
+// cover nodes in bling
+const [sugared_single]  = $(document.querySelector('button'))
+const sugared_buttons   = $(document.querySelectorAll('button'))
 
-// set attributes with an object on a node
-main_btn.attr({
+// set attributes
+const [rad_btn] = $('button.rad')
+rad_btn.attr('rad', true)
+
+rad_btn.attr({
   test: 'foo',
-  hi: 'bye',
+  hi:   'bye',
 })
 
-main_btn.attr('hi')         // "bye"
+// get attributes
+rad_btn.attr('rad')        // true
+rad_btn.attr('hi')         // "bye"
 
-// remove an attribute
-main_btn.attr('hi', null)   // "bye"
-main_btn.attr('hi')         // attribute not found
-
-// set attributes with an object on nodes
-btns.attr({
-  tests: 'foo',
-  hi: 'bye',
-})
-
-// get attributes from multiple nodes
 btns.map(btn => ({
-  tests: btn.attr('tests'),
-  hi: btn.attr('hi'),
+  tests:  btn.attr('tests'),
+  hi:     btn.attr('hi'),
 }))
+
+// remove attributes
+rad_btn.attr('hi', null)   // "bye"
+rad_btn.attr('hi')         // attribute not found
+btns.attr({
+  test:   null,
+  hi:     null,
+})
 ```
 
 ###### What for?

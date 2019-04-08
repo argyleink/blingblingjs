@@ -1,8 +1,8 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
   typeof define === 'function' && define.amd ? define(factory) :
-  (global.$ = factory());
-}(this, (function () { 'use strict';
+  (global = global || self, global.$ = factory());
+}(this, function () { 'use strict';
 
   const sugar = {
     on: function(names, fn) {
@@ -71,4 +71,4 @@
 
   return $;
 
-})));
+}));

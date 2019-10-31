@@ -77,7 +77,7 @@ If you agree with any of the following, you may appreciate this micro library:
 * Love vanilla js, want to keep your code close to it
 * Chaining is fun, Arrays are fun, essentially a functional programming fan
 * Hate typing `document.querySelector` over.. and over.. 
-* Hate typing `addEventLIstener` over.. and over..
+* Hate typing `addEventListener` over.. and over..
 * Really wish `document.querySelectorAll` had array methods on it..
 * Confused that there is no `node.setAttributes({...})` or even better `nodeList.setAttributes({...})`
 * Liked jQuery selector syntax

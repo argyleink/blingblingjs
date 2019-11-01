@@ -25,6 +25,8 @@ const $ = require('blingblingjs')           // commonjs
 // or from Pika CDN! https://cdn.pika.dev/blingblingjs/v2
 ```
 
+<br>
+
 ###### Syntax
 
 ### Quick Overview

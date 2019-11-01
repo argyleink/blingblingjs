@@ -8,10 +8,12 @@
 
 > like [bling.js](https://gist.github.com/paulirish/12fb951a8b893a454b32), but more bling
 
+<br>
+
 ###### Getting Started
 ### Installation
 ```bash
-$ npm i blingblingjs
+npm i blingblingjs
 ```
 
 ### Importing
@@ -24,17 +26,19 @@ const $ = require('blingblingjs')           // commonjs
 ```
 
 ###### Syntax
+
+### Quick Overview
 ```js
 $()        // select nodes in document or pass nodes in
 $().on     // add multiple event listeners to multiple nodes
 $().off    // remove multiple event listeners from multiple nodes
 $().attr   // CRUD attributes on nodes
+$().map    // use native array methods
 ```
 
-###### Essentials
 ### Queries
 ```js
-// get/stash nodes from the document
+// get nodes from the document
 const btns         = $('button')            // blingbling always returns an array
 const [first_btn]  = $('button[primary]')   // destructure shortcut for 1st/only match
 const btn_spans    = $('span', btns)        // provide a query context by passing a 2nd param of node/nodes
@@ -104,13 +108,8 @@ btns.attr({
 })
 ```
 
-## Putting it all together
-```js
-$('button').map(btn => ({
-  tests:  btn.attr('tests'),
-  hi:     btn.attr('hi'),
-}))
-```
+<br>
+<br>
 
 ###### What for?
 **Developer ergonomics!** 

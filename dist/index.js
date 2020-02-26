@@ -40,7 +40,7 @@
     if (!$nodes.length) $nodes = [];
 
     return Object.assign(
-      [...$nodes].map($el => Object.assign($el, sugar)), 
+      Array.from($nodes).map($el => Object.assign($el, sugar)), 
       {
         on: function(names, fn) {
           this.forEach($el => $el.on(names, fn));

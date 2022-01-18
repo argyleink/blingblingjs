@@ -121,6 +121,20 @@ test('$("button").attr({...}) multiple', t => {
   t.pass()
 })
 
+test('$("button").attr("foo", falsy_value)', t => {
+  const btn = document.createElement('button')
+
+  document.body.appendChild(btn)
+
+  t.falsy(btn.hasAttribute('foo'))
+  const $btn = $('button')
+  const value = 0
+  $btn.attr('foo', value)
+  t.is($btn.attr('foo'), value.toString())
+
+  t.pass()
+})
+
 test.cb('$("button").on("click", e => ...)', t => {
   const btn = document.createElement('button')
   btn.classList.add('test')

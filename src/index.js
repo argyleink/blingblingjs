@@ -18,8 +18,8 @@ const sugar = {
 
     val == null
       ? this.removeAttribute(attr)
-      : this.setAttribute(attr, val || '')
-      
+      : this.setAttribute(attr, val)
+
     return this
   }
 }
@@ -54,7 +54,7 @@ export default function $(query, $context = document) {
               .forEach(([key, val]) =>
                 $el.attr(key, val)))
 
-        else if (typeof attrs == 'string' && (val || val == null || val == ''))
+        else if (typeof attrs == 'string')
           this.forEach($el => $el.attr(attrs, val))
 
         return this

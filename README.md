@@ -90,7 +90,7 @@ rad_btn.attr({
 })
 
 // get an attribute
-rad_btn.attr('rad')        // true
+rad_btn.attr('rad')        // "true"
 rad_btn.attr('hi')         // "bye"
 
 // get multiple attributes

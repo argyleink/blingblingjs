@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global.$ = {}));
-}(this, function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = global || self, global.$ = factory());
+}(this, (function () { 'use strict';
 
   const sugar = {
     on: function(names, fn) {
@@ -30,8 +30,8 @@
     }
   };
 
-  const rAF = typeof requestAnimationFrame !== 'undefined' ? requestAnimationFrame : (() => {});
-  const rIC = typeof requestIdleCallback !== 'undefined' ? requestIdleCallback : (() => {});
+  $.rAF = typeof requestAnimationFrame !== 'undefined' ? requestAnimationFrame : ((callback) => callback());
+  $.rIC = typeof requestIdleCallback !== 'undefined' ? requestIdleCallback : ((callback) => callback());
 
   function $(query, $context = document) {
     let $nodes = query instanceof NodeList || Array.isArray(query)
@@ -72,10 +72,6 @@
     )
   }
 
-  exports.default = $;
-  exports.rAF = rAF;
-  exports.rIC = rIC;
+  return $;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
-
-}));
+})));

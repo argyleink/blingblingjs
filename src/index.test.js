@@ -1,7 +1,7 @@
 import test from 'ava'
 import browserEnv from 'browser-env'
 
-import $ from '../dist/index.js'
+import $, {rAF, rIC} from '../dist/index.js'
 
 browserEnv()
 
@@ -197,4 +197,12 @@ test.cb('$(node).on("click", e => ...) multiple', t => {
 
   $(list).on('click', e => t.end())
   btn.click()
+})
+
+test('rAF', async (t) => {
+  rAF(_ => t.pass())
+})
+
+test('rIC', async (t) => {
+  rIC(_ => t.pass())
 })

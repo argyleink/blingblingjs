@@ -1,16 +1,16 @@
 const sugar = {
-  on: function(names, fn) {
+  on: function(names, fn, options) {
     names
       .split(' ')
       .forEach(name =>
-        this.addEventListener(name, fn))
+        this.addEventListener(name, fn, options))
     return this
   },
-  off: function(names, fn) {
+  off: function(names, fn, options) {
     names
       .split(' ')
       .forEach(name =>
-        this.removeEventListener(name, fn))
+        this.removeEventListener(name, fn, options))
     return this
   },
   attr: function(attr, val) {
@@ -36,12 +36,12 @@ export default function $(query, $context = document) {
   return Object.assign(
     Array.from($nodes).map($el => Object.assign($el, sugar)), 
     {
-      on: function(names, fn) {
-        this.forEach($el => $el.on(names, fn))
+      on: function(names, fn, options) {
+        this.forEach($el => $el.on(names, fn, options))
         return this
       },
-      off: function(names, fn) {
-        this.forEach($el => $el.off(names, fn))
+      off: function(names, fn, options) {
+        this.forEach($el => $el.off(names, fn, options))
         return this
       },
       attr: function(attrs, val) {

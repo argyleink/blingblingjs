@@ -198,3 +198,55 @@ test.cb('$(node).on("click", e => ...) multiple', t => {
   $(list).on('click', e => t.end())
   btn.click()
 })
+
+test.cb('$("button").on("click", e => ..., { once:true })', t => {
+  t.plan(3)
+
+  const btn = document.createElement('button')
+  btn.classList.add('test')
+  document.body.appendChild(btn)
+
+  let eventCount = 0
+  $('.test').on('click', e => {
+    eventCount++
+    t.end()
+  }, { once:true })
+
+  t.is(eventCount, 0)
+
+  btn.click()
+  t.is(eventCount, 1)
+
+  btn.click()
+  t.is(eventCount, 1)
+})
+
+test('$("button").on("click ...", e => ..., { once:true }) multiple', t => {
+  t.plan(5)
+
+  const btn = document.createElement('button')
+
+  let eventCount = 0
+  $(btn).on('click dblclick', e => {
+    eventCount++
+    t.end()
+  }, { once:true })
+
+  t.is(eventCount, 0)
+
+  btn.click()
+  t.is(eventCount, 1)
+
+  btn.dispatchEvent(new window.MouseEvent('dblclick', {
+    bubbles: true
+  }))
+  t.is(eventCount, 2)
+
+  btn.click()
+  t.is(eventCount, 2)
+
+  btn.dispatchEvent(new window.MouseEvent('dblclick', {
+    bubbles: true
+  }))
+  t.is(eventCount, 2)
+})

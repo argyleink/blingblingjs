@@ -38,6 +38,8 @@ $().attr   // CRUD attributes on nodes
 $().map    // use native array methods
 ```
 
+<br>
+
 ### Queries
 ```js
 // get nodes from the document
@@ -49,6 +51,8 @@ const btn_spans    = $('span', btns)        // provide a query context by passin
 const [sugared_single]  = $(document.querySelector('button'))
 const sugared_buttons   = $(document.querySelectorAll('button'))
 ```
+
+<br>
 
 ### Array Methods
 ```js
@@ -62,11 +66,17 @@ btns.flatMap(...)
 ...
 ```
 
+<br>
+
 ### Events
 ```js
 // single events
 first_btn.on('click', ({target}) => console.log(target))
 $('button[primary]').on('click', e => console.log(e))
+
+// single events with options
+first_btn.on('click', ({target}) => console.log(target), {once: true})
+$('button[primary]').on('click', e => console.log(e), true) // useCapture
 
 // multiple events
 $('h1').on('click touchend', ({target}) => console.log(target))
@@ -76,6 +86,8 @@ const log_event = e => console.warn(e) // must have a reference to the original 
 main_btn.on('contextmenu', log_event)
 main_btn.off('contextmenu', log_event)
 ```
+
+<br>
 
 ### Attributes
 ```js
@@ -107,6 +119,22 @@ rad_btn.attr('hi')         // attribute not found
 btns.attr({
   test:   null,
   hi:     null,
+})
+```
+
+<br>
+
+### Convenience
+```js
+import {rIC, rAF} from 'blingblingjs'
+
+// requestAnimationFrame
+rAF(_ => {
+  // animation tick
+})
+
+rIC(_ => {
+  // good time to compute
 })
 ```
 

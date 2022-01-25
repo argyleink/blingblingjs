@@ -1,7 +1,7 @@
 import test from 'ava'
 import browserEnv from 'browser-env'
 
-import $ from '../dist/index.js'
+import $, {rAF, rIC} from '../dist/index.js'
 
 browserEnv()
 
@@ -249,4 +249,12 @@ test('$("button").on("click ...", e => ..., { once:true }) multiple', t => {
     bubbles: true
   }))
   t.is(eventCount, 2)
+})
+
+test.serial('rAF', async (t) => {
+  rAF ? rAF(_ => t.pass()) : t.pass()
+})
+
+test.serial('rIC', async (t) => {
+  rIC ? rIC(_ => t.pass()) : t.pass()
 })

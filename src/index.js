@@ -24,6 +24,9 @@ const sugar = {
   }
 }
 
+export const rAF = typeof requestAnimationFrame !== 'undefined' && requestAnimationFrame
+export const rIC = typeof requestIdleCallback !== 'undefined' && requestIdleCallback
+
 export default function $(query, $context = document) {
   let $nodes = query instanceof NodeList || Array.isArray(query)
     ? query

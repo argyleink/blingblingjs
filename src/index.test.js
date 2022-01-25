@@ -251,10 +251,10 @@ test('$("button").on("click ...", e => ..., { once:true }) multiple', t => {
   t.is(eventCount, 2)
 })
 
-test('rAF', async (t) => {
-  rAF(_ => t.pass())
+test.serial('rAF', async (t) => {
+  await rAF(_ => t.pass())
 })
 
-test('rIC', async (t) => {
-  rIC(_ => t.pass())
+test.serial('rIC', async (t) => {
+  await rIC(_ => t.pass())
 })

@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = global || self, global.$ = factory());
-}(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = global || self, factory(global.$ = {}));
+}(this, (function (exports) { 'use strict';
 
   const sugar = {
     on: function(names, fn, options) {
@@ -30,8 +30,17 @@
     }
   };
 
-  $.rAF = typeof requestAnimationFrame !== 'undefined' ? requestAnimationFrame : ((callback) => callback());
-  $.rIC = typeof requestIdleCallback !== 'undefined' ? requestIdleCallback : ((callback) => callback());
+  const _60fps = 1000/60;
+
+  const rAF = typeof requestAnimationFrame !== 'undefined' ?
+    requestAnimationFrame :
+    (async (callback) => new Promise((resolve) => setTimeout(() => { resolve(); callback(); }, _60fps)));
+  if (typeof requestAnimationFrame === 'undefined') console.error('requestAnimationFrame not found - falling back to 60 fps');
+
+  const rIC = typeof requestIdleCallback !== 'undefined' ?
+    requestIdleCallback :
+    (async (callback) => new Promise((resolve) => setTimeout(() => { resolve(); callback(); }, _60fps)));
+  if (typeof requestAnimationFrame === 'undefined') console.error('requestIdleCallback not found - falling back to 60 fps');
 
   function $(query, $context = document) {
     let $nodes = query instanceof NodeList || Array.isArray(query)
@@ -72,6 +81,10 @@
     )
   }
 
-  return $;
+  exports.default = $;
+  exports.rAF = rAF;
+  exports.rIC = rIC;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

@@ -24,17 +24,8 @@ const sugar = {
   }
 }
 
-const _60fps = 1000/60
-
-export const rAF = typeof requestAnimationFrame !== 'undefined' ?
-  requestAnimationFrame :
-  (async (callback) => new Promise((resolve) => setTimeout(() => { resolve(); callback() }, _60fps)))
-if (typeof requestAnimationFrame === 'undefined') console.error('requestAnimationFrame not found - falling back to 60 fps')
-
-export const rIC = typeof requestIdleCallback !== 'undefined' ?
-  requestIdleCallback :
-  (async (callback) => new Promise((resolve) => setTimeout(() => { resolve(); callback() }, _60fps)))
-if (typeof requestAnimationFrame === 'undefined') console.error('requestIdleCallback not found - falling back to 60 fps')
+export const rAF = typeof requestAnimationFrame !== 'undefined' && requestAnimationFrame
+export const rIC = typeof requestIdleCallback !== 'undefined' && requestIdleCallback
 
 export default function $(query, $context = document) {
   let $nodes = query instanceof NodeList || Array.isArray(query)

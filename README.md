@@ -133,6 +133,7 @@ rAF(_ => {
   // animation tick
 })
 
+// requestIdleCallback
 rIC(_ => {
   // good time to compute
 })

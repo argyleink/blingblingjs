@@ -1,6 +1,6 @@
 # BlingBlingJS
 <p style="text-align='center'">
-  <img src="https://img.shields.io/travis/argyleink/blingblingjs/master.svg" alt="Build Status">
+  <img src="[https://img.shields.io/travis/argyleink/blingblingjs/master.svg](https://github.com/argyleink/blingblingjs/actions/workflows/main.yml/badge.svg)" alt="Build Status">
   <img src="https://img.shields.io/npm/dt/blingblingjs.svg" alt="Total Downloads">
   <img src="https://img.shields.io/npm/v/blingblingjs.svg" alt="Latest Release">
   <img src="https://img.shields.io/npm/l/blingblingjs.svg" alt="License">

@@ -25,6 +25,14 @@ const $ = require('blingblingjs')           // commonjs
 // or from Pika CDN! https://cdn.pika.dev/blingblingjs/v2
 ```
 
+### [Bookmarklet](https://github.com/argyleink/blingblingjs/issues/42)
+```js
+javascript: fetch('https://cdn.jsdelivr.net/npm/blingblingjs@latest/dist/index.min.js').then((x) => x.text()).then((x) => {
+  eval(x); $ = $.default;
+  console.log("💲 BlingBlingJS ready 💲");
+});
+```
+
 <br>
 
 ###### Syntax

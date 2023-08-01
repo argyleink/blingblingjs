@@ -7,12 +7,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: Install
-        uses: ianwalter/puppeteer@v2.0.0
+        uses: ianwalter/playwright-container@v3.0.0
       - name: Install NPM Deps
-        uses: ianwalter/puppeteer@v2.0.0
+        uses: ianwalter/playwright-container@v3.0.0
         with:
           args: npm i
       - name: Test
-        uses: ianwalter/puppeteer@v2.0.0
+        uses: ianwalter/playwright-container@v3.0.0
         with:
           args: npm test

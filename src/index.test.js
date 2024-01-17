@@ -121,6 +121,66 @@ test('$("button").attr({...}) multiple', t => {
   t.pass()
 })
 
+test('$("button").attr("fooBar") normalize', t => {
+  const btn = document.createElement('button');
+
+  document.body.appendChild(btn)
+
+  t.falsy(btn.hasAttribute('foo-bar'))
+  $('button').attr('fooBar', true)
+  t.truthy(btn.hasAttribute('foo-bar'))
+
+  t.pass()
+})
+
+test('$("button").attr("fooBar") normalize multiple', t => {
+  const btn = document.createElement('button')
+
+  document.body.appendChild(btn)
+  document.body.appendChild(btn)
+
+  t.falsy(btn.hasAttribute('foo-bar'))
+  $('button').attr('fooBar', true);
+  t.truthy(btn.hasAttribute('foo-bar'))
+
+  t.pass();
+})
+
+test('$("button").attr({...}) normalize', t => {
+  const btn = document.createElement('button')
+
+  document.body.appendChild(btn)
+
+  t.falsy(btn.hasAttribute('foo-bar'))
+  t.falsy(btn.hasAttribute('bar-foo'))
+
+  $('button').attr({
+    fooBar: true,
+    barFoo: true
+  })
+
+  t.truthy(btn.hasAttribute('foo-bar'))
+  t.truthy(btn.hasAttribute('bar-foo'))
+})
+
+test('$("button").attr({...}) normalize multiple', t => {
+  const btn = document.createElement('button')
+
+  document.body.appendChild(btn)
+  document.body.appendChild(btn)
+
+  t.falsy(btn.hasAttribute('foo-bar'))
+  t.falsy(btn.hasAttribute('bar-foo'))
+
+  $('button').attr({
+    fooBar: true,
+    barFoo: true
+  })
+
+  t.truthy(btn.hasAttribute('foo-bar'))
+  t.truthy(btn.hasAttribute('bar-foo'))
+})
+
 test('$("button").attr("foo", falsy_value)', t => {
   const btn = document.createElement('button')
 

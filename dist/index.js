@@ -20,6 +20,7 @@
       return this
     },
     attr: function(attr, val) {
+      attr = attr.replace(/(.)([A-Z])/g, '$1-$2').toLowerCase();
       if (val === undefined) return this.getAttribute(attr)
 
       val == null
